@@ -20,7 +20,6 @@ def create_category():
 
 @category_bp.route('/categories', methods=['GET'])
 @jwt_required()
-@admin_required
 def get_categories():
     categories = Category.query.all()
     output = [{'id': category.id, 'name': category.name} for category in categories]
