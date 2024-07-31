@@ -1,8 +1,7 @@
-# app/controllers/admin_controller.py
-
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
-from ..models import User, Score
+from ..models.user_model import User
+from ..models.score_model import Score
 from .. import db
 from ..decorators import admin_required
 
