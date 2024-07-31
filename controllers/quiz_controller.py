@@ -59,3 +59,20 @@ def get_quizzes():
         }
         output.append(quiz_data)
     return jsonify({'quizzes': output})
+
+@quiz_bp.route('/quizzes/category/<int:category_id>', methods=['GET'])
+@jwt_required()
+def get_quizzes_by_category(category_id):
+    quizzes = Quiz.query.filter_by(category_id=category_id).all()
+    
+    output = [
+        {
+            'id': quiz.id,
+            'title': quiz.title,
+            'description': quiz.description,
+            'creation_date': quiz.creation_date,
+            'end_date': quiz.end_date
+        } for quiz in quizzes
+    ]
+    
+    return jsonify({'quizzes': output})
