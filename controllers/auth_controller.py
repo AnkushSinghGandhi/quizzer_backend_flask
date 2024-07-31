@@ -10,7 +10,8 @@ auth_bp = Blueprint('auth', __name__)
 def register():
     data = request.get_json()
     hashed_password = generate_password_hash(data['password'], method='sha256')
-    new_user = User(username=data['username'], email=data['email'], password=hashed_password)
+    role = data.get('role', 'user')  # Default role is 'user'
+    new_user = User(username=data['username'], email=data['email'], password=hashed_password, role=role)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({'message': 'User registered successfully!'})
