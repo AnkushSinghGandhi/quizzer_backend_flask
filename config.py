@@ -1,4 +1,7 @@
 import os
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'

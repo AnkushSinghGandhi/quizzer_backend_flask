@@ -1,10 +1,9 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from config import Config
+from config import Config, db
 
-db = SQLAlchemy()
+# Initialize extensions
 migrate = Migrate()
 jwt = JWTManager()
 
@@ -12,12 +11,23 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     
+    # Initialize extensions with the app
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
     
     with app.app_context():
-        # Import parts of our application
+
+        # Import models to register them with SQLAlchemy
+        from models.score_model import Score
+        from models.user_model import User
+        from models.quiz_model import Quiz
+        from models.question_model import Question
+        from models.category_model import Category
+
+        db.create_all()
+
+        # Import and register blueprints
         from controllers.auth_controller import auth_bp
         from controllers.quiz_controller import quiz_bp
         from controllers.question_controller import question_bp
@@ -25,7 +35,6 @@ def create_app():
         from controllers.admin_controller import admin_bp
         from controllers.category_controller import category_bp
 
-        # Register Blueprints
         app.register_blueprint(auth_bp, url_prefix='/auth')
         app.register_blueprint(quiz_bp)
         app.register_blueprint(question_bp)

@@ -1,6 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from config import db
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
