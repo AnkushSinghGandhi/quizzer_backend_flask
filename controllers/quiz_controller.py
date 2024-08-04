@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from datetime import datetime
-from ..models.quiz_model import Quiz
-from .. import db
-from ..decorators import admin_required
+from models.quiz_model import Quiz
+from app import db
+from decorators import admin_required
 
 quiz_bp = Blueprint('quiz', __name__)
 

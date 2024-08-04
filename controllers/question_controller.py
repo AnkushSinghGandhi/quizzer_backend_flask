@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from ..models.question_model import Question
-from ..models.choice_model import Choice
-from .. import db
+from models.question_model import Question
+from models.choice_model import Choice
+from app import db
 
 question_bp = Blueprint('question', __name__)
 

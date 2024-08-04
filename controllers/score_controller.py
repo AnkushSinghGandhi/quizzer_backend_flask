@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from ..models import Score
-from .. import db
+from models.score_model import Score
+from app import db
 
 score_bp = Blueprint('score', __name__)
 

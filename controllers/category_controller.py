@@ -2,9 +2,9 @@
 
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from ..models.category_model import Category
-from .. import db
-from ..decorators import admin_required
+from models.category_model import Category
+from app import db
+from decorators import admin_required
 
 category_bp = Blueprint('category', __name__)
 
